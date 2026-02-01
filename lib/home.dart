@@ -121,6 +121,7 @@ class _HomeState extends State<Home> {
                               MaterialPageRoute(
                                 builder: (build) => Scaffold(
                                   appBar: AppBar(
+                                    centerTitle: true,
                                     title: Text(stories[index]['name']),
                                   ),
                                   body: Center(
