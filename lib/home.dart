@@ -86,49 +86,49 @@ class _HomeState extends State<Home> {
 
     return Scaffold(
       appBar: AppBar(toolbarHeight: 5),
-      body: Center(
-        child: ConstrainedBox(
-          constraints: BoxConstraints(maxWidth: 450),
-          child: SingleChildScrollView(
-            child: Column(
-              children: [
-                AppBar(
-                  leading: Icon(Icons.add),
-                  title: Image.asset(
-                    width: 175,
-                    'assets/images/Instagram_logo.png',
-                  ),
-                  actions: [Icon(Icons.favorite_outline)],
-                  centerTitle: true,
-                ),
-                //
-                //
-                //
-                //Stories
-                SizedBox(
-                  height: 100,
-                  child: ScrollConfiguration(
-                    behavior: WebScrollBehavior(),
-                    child: ListView.builder(
-                      shrinkWrap: true,
-                      scrollDirection: Axis.horizontal,
-                      itemCount: images.length,
-                      itemBuilder: (context, index) {
-                        return InkWell(
-                          onTap: () {
-                            Navigator.push(
-                              context,
-                              MaterialPageRoute(
-                                builder: (build) => Scaffold(
-                                  appBar: AppBar(
-                                    centerTitle: true,
-                                    title: Text(stories[index]['name']),
+      body: SingleChildScrollView(
+        child: Column(
+          children: [
+            AppBar(
+              leading: Icon(Icons.add),
+              title: Image.asset(
+                width: 175,
+                'assets/images/Instagram_logo.png',
+              ),
+              actions: [Icon(Icons.favorite_outline)],
+              centerTitle: true,
+            ),
+            //
+            //
+            //
+            //Stories
+            SizedBox(
+              height: 100,
+              child: ScrollConfiguration(
+                behavior: WebScrollBehavior(),
+                child: ListView.builder(
+                  shrinkWrap: true,
+                  scrollDirection: Axis.horizontal,
+                  itemCount: images.length,
+                  itemBuilder: (context, index) {
+                    return InkWell(
+                      onTap: () {
+                        Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                            builder: (build) => Container(
+                              color: Colors.grey[900],
+                              child: Center(
+                                child: ConstrainedBox(
+                                  constraints: const BoxConstraints(
+                                    maxWidth: 450,
                                   ),
-                                  body: Center(
-                                    child: ConstrainedBox(
-                                      constraints: BoxConstraints(
-                                        maxWidth: 450,
-                                      ),
+                                  child: Scaffold(
+                                    appBar: AppBar(
+                                      centerTitle: true,
+                                      title: Text(stories[index]['name']),
+                                    ),
+                                    body: Center(
                                       child: Column(
                                         mainAxisAlignment:
                                             MainAxisAlignment.center,
@@ -141,151 +141,147 @@ class _HomeState extends State<Home> {
                                   ),
                                 ),
                               ),
-                            );
-                          },
-                          child: SizedBox(
-                            width: 80,
-                            height: 100,
-                            child: Column(
-                              children: [
-                                Container(
-                                  width: 70,
-                                  height: 70,
-                                  decoration: BoxDecoration(
-                                    gradient: LinearGradient(
-                                      colors: [
-                                        Color.fromARGB(255, 217, 40, 126),
-                                        Color.fromARGB(255, 253, 213, 34),
-                                      ],
-                                    ),
-                                    shape: BoxShape.circle,
-                                  ),
-                                  child: Container(
-                                    clipBehavior: Clip.hardEdge,
-
-                                    decoration: BoxDecoration(
-                                      shape: BoxShape.circle,
-                                      color: Colors.white,
-                                    ),
-                                    margin: EdgeInsets.all(5),
-
-                                    child: Container(
-                                      margin: EdgeInsets.all(3),
-                                      clipBehavior: Clip.hardEdge,
-                                      decoration: BoxDecoration(
-                                        shape: BoxShape.circle,
-                                      ),
-                                      child: stories[index]['image'],
-                                    ),
-                                  ),
-                                ),
-
-                                Text(stories[index]['name']),
-                              ],
                             ),
                           ),
                         );
                       },
-                    ),
-                  ),
-                ),
-                //
-                //
-                //
-                //Feed
-                ListView.builder(
-                  shrinkWrap: true,
-                  physics: NeverScrollableScrollPhysics(),
-                  itemCount: images.length,
-                  itemBuilder: (context, index) {
-                    return Padding(
-                      padding: const EdgeInsets.only(top: 15.0),
                       child: SizedBox(
-                        height: 540,
+                        width: 80,
+                        height: 100,
                         child: Column(
                           children: [
-                            Padding(
-                              padding: const EdgeInsets.symmetric(
-                                vertical: 8.0,
+                            Container(
+                              width: 70,
+                              height: 70,
+                              decoration: BoxDecoration(
+                                gradient: LinearGradient(
+                                  colors: [
+                                    Color.fromARGB(255, 217, 40, 126),
+                                    Color.fromARGB(255, 253, 213, 34),
+                                  ],
+                                ),
+                                shape: BoxShape.circle,
                               ),
-                              child: Row(
-                                crossAxisAlignment: CrossAxisAlignment.start,
-                                children: [
-                                  SizedBox(width: 10),
-                                  Container(
-                                    height: 42,
-                                    clipBehavior: Clip.hardEdge,
-                                    decoration: BoxDecoration(
-                                      shape: BoxShape.circle,
-                                    ),
-                                    child: feed[index]['image'],
-                                  ),
-                                  Padding(
-                                    padding: const EdgeInsets.only(left: 8.0),
-                                    child: Text(
-                                      feed[index]['name'],
-                                      style: TextStyle(
-                                        fontWeight: FontWeight.bold,
-                                      ),
-                                    ),
-                                  ),
-                                  Spacer(),
-                                  InkWell(
-                                    onTap: () {
-                                      setState(() {
-                                        isFollowed[index] = !isFollowed[index];
-                                      });
-                                    },
-                                    child: Container(
-                                      decoration: BoxDecoration(
-                                        color: const Color.fromARGB(
-                                          255,
-                                          202,
-                                          200,
-                                          200,
-                                        ),
-                                        borderRadius: BorderRadius.circular(7),
-                                      ),
-                                      height: 25,
-                                      width: 75,
+                              child: Container(
+                                clipBehavior: Clip.hardEdge,
 
-                                      alignment: Alignment.center,
-                                      child: Text(
-                                        feed[index]['isFollowed']
-                                            ? 'Unfollow'
-                                            : 'Follow',
-                                      ),
-                                    ),
+                                decoration: BoxDecoration(
+                                  shape: BoxShape.circle,
+                                  color: Colors.white,
+                                ),
+                                margin: EdgeInsets.all(5),
+
+                                child: Container(
+                                  margin: EdgeInsets.all(3),
+                                  clipBehavior: Clip.hardEdge,
+                                  decoration: BoxDecoration(
+                                    shape: BoxShape.circle,
                                   ),
-                                  Icon(Icons.more_vert),
-                                ],
+                                  child: stories[index]['image'],
+                                ),
                               ),
                             ),
-                            feed[index]['image'],
 
-                            Padding(
-                              padding: const EdgeInsets.only(top: 3.0),
-                              child: Row(
-                                spacing: 8,
-                                children: [
-                                  Icon(Icons.favorite_outline),
-                                  Icon(Icons.mode_comment_outlined),
-                                  Icon(Icons.loop),
-                                  Icon(Icons.send),
-                                  Spacer(),
-                                  Icon(Icons.bookmark_outline),
-                                ],
-                              ),
-                            ),
+                            Text(stories[index]['name']),
                           ],
                         ),
                       ),
                     );
                   },
                 ),
-              ],
+              ),
             ),
-          ),
+            //
+            //
+            //
+            //Feed
+            ListView.builder(
+              shrinkWrap: true,
+              physics: NeverScrollableScrollPhysics(),
+              itemCount: images.length,
+              itemBuilder: (context, index) {
+                return Padding(
+                  padding: const EdgeInsets.only(top: 15.0),
+                  child: SizedBox(
+                    height: 540,
+                    child: Column(
+                      children: [
+                        Padding(
+                          padding: const EdgeInsets.symmetric(vertical: 8.0),
+                          child: Row(
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: [
+                              SizedBox(width: 10),
+                              Container(
+                                height: 42,
+                                clipBehavior: Clip.hardEdge,
+                                decoration: BoxDecoration(
+                                  shape: BoxShape.circle,
+                                ),
+                                child: feed[index]['image'],
+                              ),
+                              Padding(
+                                padding: const EdgeInsets.only(left: 8.0),
+                                child: Text(
+                                  feed[index]['name'],
+                                  style: TextStyle(fontWeight: FontWeight.bold),
+                                ),
+                              ),
+                              Spacer(),
+                              InkWell(
+                                onTap: () {
+                                  setState(() {
+                                    isFollowed[index] = !isFollowed[index];
+                                  });
+                                },
+                                child: Container(
+                                  decoration: BoxDecoration(
+                                    color: const Color.fromARGB(
+                                      255,
+                                      202,
+                                      200,
+                                      200,
+                                    ),
+                                    borderRadius: BorderRadius.circular(7),
+                                  ),
+                                  height: 25,
+                                  width: 75,
+
+                                  alignment: Alignment.center,
+                                  child: Text(
+                                    feed[index]['isFollowed']
+                                        ? 'Following'
+                                        : 'Follow',
+                                  ),
+                                ),
+                              ),
+                              Icon(Icons.more_vert),
+                            ],
+                          ),
+                        ),
+                        feed[index]['image'],
+
+                        Padding(
+                          padding: const EdgeInsets.only(top: 3.0),
+                          child: Row(
+                            spacing: 8,
+                            children: [
+                              Icon(Icons.favorite_outline),
+                              Icon(Icons.mode_comment_outlined),
+                              Icon(Icons.loop),
+                              Icon(Icons.send),
+                              Spacer(),
+                              Icon(Icons.bookmark_outline),
+                            ],
+                          ),
+                        ),
+                      ],
+                    ),
+                  ),
+                );
+              },
+            ),
+          ],
         ),
       ),
     );
