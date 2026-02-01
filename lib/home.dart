@@ -52,8 +52,8 @@ class _HomeState extends State<Home> {
       'Raditz',
       'Vegito',
       'Guldo',
-      'Gotenks3',
-      'Gotenks1',
+      'Gogeta',
+      'Gotenks',
       'Roshi',
       'Vegeta',
     ];
