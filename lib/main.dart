@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:non_func_ig_cone/home.dart';
+import 'package:non_func_ig_cone/profile.dart';
 import 'package:non_func_ig_cone/reels.dart';
 
 void main() {
@@ -27,8 +28,13 @@ class MainScreen extends StatefulWidget {
 
 class _MainScreenState extends State<MainScreen> {
   int selectedIndex = 0;
-  final List<Widget> screens = [const Home(), const Reels()];
+  final List<Widget> screens = const [Home(), Reels(), Profile()];
 
+  final List bottomNavbar = [
+    [Icon(Icons.home), Icon(Icons.home_outlined)],
+    [Icon(Icons.video_library), Icon(Icons.video_library_outlined)],
+    [Icon(Icons.person), Icon(Icons.person_outline)],
+  ];
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -39,11 +45,26 @@ class _MainScreenState extends State<MainScreen> {
           child: Scaffold(
             body: screens[selectedIndex],
             bottomNavigationBar: BottomNavigationBar(
-              items: const <BottomNavigationBarItem>[
-                BottomNavigationBarItem(icon: Icon(Icons.home), label: 'Home'),
+              selectedItemColor: Colors.black,
+              unselectedItemColor: Colors.black,
+              items: <BottomNavigationBarItem>[
                 BottomNavigationBarItem(
-                  icon: Icon(Icons.video_library),
+                  icon: 0 == selectedIndex
+                      ? bottomNavbar[0][0]
+                      : bottomNavbar[0][1],
+                  label: 'Home',
+                ),
+                BottomNavigationBarItem(
+                  icon: 1 == selectedIndex
+                      ? bottomNavbar[1][0]
+                      : bottomNavbar[1][1],
                   label: 'Reels',
+                ),
+                BottomNavigationBarItem(
+                  icon: 2 == selectedIndex
+                      ? bottomNavbar[1][0]
+                      : bottomNavbar[1][1],
+                  label: 'Profile',
                 ),
               ],
               currentIndex: selectedIndex,

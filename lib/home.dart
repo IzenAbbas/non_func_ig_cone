@@ -1,19 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/gestures.dart';
 
-List<bool> isFollowed = [
-  false,
-  false,
-  false,
-  false,
-  false,
-  false,
-  false,
-  false,
-  false,
-  false,
-];
-
 class WebScrollBehavior extends MaterialScrollBehavior {
   @override
   Set<PointerDeviceKind> get dragDevices => {
@@ -30,6 +17,69 @@ class Home extends StatefulWidget {
 }
 
 class _HomeState extends State<Home> {
+  final List flags = [
+    {
+      'isLiked': false,
+      'isReposted': false,
+      'isSaved': false,
+      'isFollowed': false,
+    },
+    {
+      'isLiked': false,
+      'isReposted': false,
+      'isSaved': false,
+      'isFollowed': false,
+    },
+    {
+      'isLiked': false,
+      'isReposted': false,
+      'isSaved': false,
+      'isFollowed': false,
+    },
+    {
+      'isLiked': false,
+      'isReposted': false,
+      'isSaved': false,
+      'isFollowed': false,
+    },
+    {
+      'isLiked': false,
+      'isReposted': false,
+      'isSaved': false,
+      'isFollowed': false,
+    },
+    {
+      'isLiked': false,
+      'isReposted': false,
+      'isSaved': false,
+      'isFollowed': false,
+    },
+    {
+      'isLiked': false,
+      'isReposted': false,
+      'isSaved': false,
+      'isFollowed': false,
+    },
+    {
+      'isLiked': false,
+      'isReposted': false,
+      'isSaved': false,
+      'isFollowed': false,
+    },
+    {
+      'isLiked': false,
+      'isReposted': false,
+      'isSaved': false,
+      'isFollowed': false,
+    },
+    {
+      'isLiked': false,
+      'isReposted': false,
+      'isSaved': false,
+      'isFollowed': false,
+    },
+  ];
+
   @override
   Widget build(BuildContext context) {
     final List<Image> images = [
@@ -71,17 +121,17 @@ class _HomeState extends State<Home> {
       {'name': names[9], 'image': images[9]},
     ];
 
-    List feed = [
-      {'name': names[0], 'image': images[0], 'isFollowed': isFollowed[0]},
-      {'name': names[1], 'image': images[1], 'isFollowed': isFollowed[1]},
-      {'name': names[2], 'image': images[2], 'isFollowed': isFollowed[2]},
-      {'name': names[3], 'image': images[3], 'isFollowed': isFollowed[3]},
-      {'name': names[4], 'image': images[4], 'isFollowed': isFollowed[4]},
-      {'name': names[5], 'image': images[5], 'isFollowed': isFollowed[5]},
-      {'name': names[6], 'image': images[6], 'isFollowed': isFollowed[6]},
-      {'name': names[7], 'image': images[7], 'isFollowed': isFollowed[7]},
-      {'name': names[8], 'image': images[8], 'isFollowed': isFollowed[8]},
-      {'name': names[9], 'image': images[9], 'isFollowed': isFollowed[9]},
+    final List feed = [
+      {'name': names[0], 'image': images[0], 'flags': flags[0]},
+      {'name': names[1], 'image': images[1], 'flags': flags[1]},
+      {'name': names[2], 'image': images[2], 'flags': flags[2]},
+      {'name': names[3], 'image': images[3], 'flags': flags[3]},
+      {'name': names[4], 'image': images[4], 'flags': flags[4]},
+      {'name': names[5], 'image': images[5], 'flags': flags[5]},
+      {'name': names[6], 'image': images[6], 'flags': flags[6]},
+      {'name': names[7], 'image': images[7], 'flags': flags[7]},
+      {'name': names[8], 'image': images[8], 'flags': flags[8]},
+      {'name': names[9], 'image': images[9], 'flags': flags[9]},
     ];
 
     return Scaffold(
@@ -90,18 +140,16 @@ class _HomeState extends State<Home> {
         child: Column(
           children: [
             AppBar(
-              leading: Icon(Icons.add),
+              leading: const Icon(Icons.add),
               title: Image.asset(
                 width: 175,
                 'assets/images/Instagram_logo.png',
               ),
-              actions: [Icon(Icons.favorite_outline)],
+              actions: const [Icon(Icons.favorite_outline)],
               centerTitle: true,
             ),
-            //
-            //
-            //
-            //Stories
+
+            // Stories
             SizedBox(
               height: 100,
               child: ScrollConfiguration(
@@ -117,7 +165,7 @@ class _HomeState extends State<Home> {
                           context,
                           MaterialPageRoute(
                             builder: (build) => Container(
-                              color: Colors.grey[900],
+                              color: Colors.black,
                               child: Center(
                                 child: ConstrainedBox(
                                   constraints: const BoxConstraints(
@@ -191,13 +239,11 @@ class _HomeState extends State<Home> {
                 ),
               ),
             ),
-            //
-            //
-            //
-            //Feed
+
+            // Feed
             ListView.builder(
               shrinkWrap: true,
-              physics: NeverScrollableScrollPhysics(),
+              physics: const NeverScrollableScrollPhysics(),
               itemCount: images.length,
               itemBuilder: (context, index) {
                 return Padding(
@@ -211,27 +257,33 @@ class _HomeState extends State<Home> {
                           child: Row(
                             crossAxisAlignment: CrossAxisAlignment.start,
                             children: [
-                              SizedBox(width: 10),
+                              const SizedBox(width: 10),
                               Container(
                                 height: 42,
                                 clipBehavior: Clip.hardEdge,
-                                decoration: BoxDecoration(
+                                decoration: const BoxDecoration(
                                   shape: BoxShape.circle,
                                 ),
                                 child: feed[index]['image'],
                               ),
                               Padding(
-                                padding: const EdgeInsets.only(left: 8.0),
+                                padding: const EdgeInsets.only(
+                                  left: 8.0,
+                                  top: 10,
+                                ),
                                 child: Text(
                                   feed[index]['name'],
-                                  style: TextStyle(fontWeight: FontWeight.bold),
+                                  style: const TextStyle(
+                                    fontWeight: FontWeight.bold,
+                                  ),
                                 ),
                               ),
-                              Spacer(),
+                              const Spacer(),
                               InkWell(
                                 onTap: () {
                                   setState(() {
-                                    isFollowed[index] = !isFollowed[index];
+                                    flags[index]['isFollowed'] =
+                                        !flags[index]['isFollowed'];
                                   });
                                 },
                                 child: Container(
@@ -246,32 +298,80 @@ class _HomeState extends State<Home> {
                                   ),
                                   height: 25,
                                   width: 75,
-
                                   alignment: Alignment.center,
                                   child: Text(
-                                    feed[index]['isFollowed']
+                                    flags[index]['isFollowed']
                                         ? 'Following'
                                         : 'Follow',
                                   ),
                                 ),
                               ),
-                              Icon(Icons.more_vert),
+                              const SizedBox(width: 8),
+                              const Icon(Icons.more_vert),
                             ],
                           ),
                         ),
+
                         feed[index]['image'],
 
                         Padding(
                           padding: const EdgeInsets.only(top: 3.0),
                           child: Row(
-                            spacing: 8,
                             children: [
-                              Icon(Icons.favorite_outline),
-                              Icon(Icons.mode_comment_outlined),
-                              Icon(Icons.loop),
-                              Icon(Icons.send),
-                              Spacer(),
-                              Icon(Icons.bookmark_outline),
+                              const SizedBox(width: 8),
+                              InkWell(
+                                onTap: () {
+                                  setState(() {
+                                    flags[index]['isLiked'] =
+                                        !flags[index]['isLiked'];
+                                  });
+                                },
+                                child: Icon(
+                                  flags[index]['isLiked']
+                                      ? Icons.favorite
+                                      : Icons.favorite_outline,
+                                  color: flags[index]['isLiked']
+                                      ? Colors.red
+                                      : Colors.black,
+                                ),
+                              ),
+                              const SizedBox(width: 8),
+                              const Icon(Icons.mode_comment_outlined),
+                              const SizedBox(width: 8),
+                              InkWell(
+                                onTap: () {
+                                  setState(() {
+                                    flags[index]['isReposted'] =
+                                        !flags[index]['isReposted'];
+                                  });
+                                },
+                                child: Icon(
+                                  Icons.loop,
+                                  color: flags[index]['isReposted']
+                                      ? Colors.green
+                                      : Colors.black,
+                                ),
+                              ),
+                              const SizedBox(width: 8),
+                              const Icon(Icons.send),
+                              const Spacer(),
+                              InkWell(
+                                onTap: () {
+                                  setState(() {
+                                    flags[index]['isSaved'] =
+                                        !flags[index]['isSaved'];
+                                  });
+                                },
+                                child: Icon(
+                                  flags[index]['isSaved']
+                                      ? Icons.bookmark
+                                      : Icons.bookmark_outline,
+                                  color: flags[index]['isSaved']
+                                      ? Colors.yellow
+                                      : Colors.black,
+                                ),
+                              ),
+                              const SizedBox(width: 8),
                             ],
                           ),
                         ),
