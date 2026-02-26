@@ -312,7 +312,15 @@ class _HomeState extends State<Home> {
                           ),
                         ),
 
-                        feed[index]['image'],
+                        InkWell(
+                          onDoubleTap: () {
+                            setState(() {
+                              flags[index]['isLiked'] =
+                                  !flags[index]['isLiked'];
+                            });
+                          },
+                          child: feed[index]['image'],
+                        ),
 
                         Padding(
                           padding: const EdgeInsets.only(top: 3.0),

@@ -1,9 +1,15 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:non_func_ig_cone/home.dart';
 import 'package:non_func_ig_cone/profile.dart';
 import 'package:non_func_ig_cone/reels.dart';
 
 void main() {
+  WidgetsFlutterBinding.ensureInitialized();
+  SystemChrome.setPreferredOrientations([
+    DeviceOrientation.portraitUp,
+    DeviceOrientation.portraitDown,
+  ]);
   runApp(const MyApp());
 }
 
@@ -29,12 +35,26 @@ class MainScreen extends StatefulWidget {
 class _MainScreenState extends State<MainScreen> {
   int selectedIndex = 0;
   final List<Widget> screens = const [Home(), Reels(), Profile()];
+  late PageController _pageController;
 
   final List bottomNavbar = [
     [Icon(Icons.home), Icon(Icons.home_outlined)],
     [Icon(Icons.video_library), Icon(Icons.video_library_outlined)],
     [Icon(Icons.person), Icon(Icons.person_outline)],
   ];
+
+  @override
+  void initState() {
+    super.initState();
+    _pageController = PageController();
+  }
+
+  @override
+  void dispose() {
+    _pageController.dispose();
+    super.dispose();
+  }
+
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -43,10 +63,18 @@ class _MainScreenState extends State<MainScreen> {
         child: ConstrainedBox(
           constraints: const BoxConstraints(maxWidth: 450),
           child: Scaffold(
-            body: screens[selectedIndex],
+            body: PageView(
+              controller: _pageController,
+              onPageChanged: (index) {
+                setState(() {
+                  selectedIndex = index;
+                });
+              },
+              children: screens,
+            ),
             bottomNavigationBar: BottomNavigationBar(
               selectedItemColor: Colors.black,
-              unselectedItemColor: Colors.black,
+              unselectedItemColor: Colors.grey,
               items: <BottomNavigationBarItem>[
                 BottomNavigationBarItem(
                   icon: 0 == selectedIndex
@@ -62,8 +90,8 @@ class _MainScreenState extends State<MainScreen> {
                 ),
                 BottomNavigationBarItem(
                   icon: 2 == selectedIndex
-                      ? bottomNavbar[1][0]
-                      : bottomNavbar[1][1],
+                      ? bottomNavbar[2][0]
+                      : bottomNavbar[2][1],
                   label: 'Profile',
                 ),
               ],
@@ -72,6 +100,7 @@ class _MainScreenState extends State<MainScreen> {
                 setState(() {
                   selectedIndex = index;
                 });
+                _pageController.jumpToPage(index);
               },
             ),
           ),

@@ -168,13 +168,16 @@ class _ProfileState extends State<Profile> {
           },
           body: Column(
             children: [
-              const TabBar(
-                tabs: [
+                TabBar(
+                indicatorColor: Colors.black,
+                labelColor: Colors.black,
+                unselectedLabelColor: Colors.grey,
+                tabs: const [
                   Tab(icon: Icon(Icons.grid_view_rounded)),
                   Tab(icon: Icon(Icons.video_collection_outlined)),
                   Tab(icon: Icon(Icons.person_pin_rounded)),
                 ],
-              ),
+                ),
               Expanded(
                 child: TabBarView(
                   children: [

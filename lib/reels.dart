@@ -147,7 +147,14 @@ class _ReelsState extends State<Reels> {
           return Stack(
             fit: StackFit.expand,
             children: [
-              reels[index]['image'],
+              InkWell(
+                onDoubleTap: () {
+                  setState(() {
+                    flags[index]['isLiked'] = !flags[index]['isLiked'];
+                  });
+                },
+                child: reels[index]['image'],
+              ),
 
               Positioned(
                 bottom: 80,
